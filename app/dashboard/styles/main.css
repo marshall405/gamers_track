@@ -1,0 +1,131 @@
+html {
+    font-family: sans-serif;
+    color: rgb(92, 92, 92);
+    padding: 3px;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+body {
+    position: relative;
+    min-height: 100vh;
+    max-height: 100vh;
+}
+
+.warning {
+    color: rgb(219, 10, 10);
+}
+.wrong {
+    border: 1px solid red !important;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 7px;
+    box-shadow: 0px 0px 1px rgb(92, 92, 92);
+}
+
+button:hover {
+    background: rgba(179, 178, 178, 0.3);
+}
+
+.circle {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin: 0 23px;
+}
+.online {
+    background: rgb(49, 177, 49);
+}
+.offline {
+    background: rgb(150, 148, 148);
+}
+/* Toggle Gamer List Button */
+
+button.toggle-gamers {
+    display: none;
+    margin: 15px;
+}
+/* MAIN */
+
+main {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+.gamers {
+    flex: 1;
+    box-shadow: 0px 0px 1px rgb(92, 92, 92);
+    border-radius: 5px;
+    max-width: 400px;
+    padding: 10px;
+    overflow-x: scroll; 
+    background: #FFF;
+}
+
+.gamers .follow-stats {
+    display: flex;
+    justify-content: flex-end;
+}
+.gamers .follow-stats h6:first-child {
+    margin: 0 10px;
+}
+.gamers h6.following {
+    text-align: right;
+}
+.gamer {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(179, 178, 178, 0.1);
+    border-radius: 5px;
+    margin: 10px auto;
+    padding: 5px;
+}
+.gamer:hover {
+    background: rgba(179, 178, 178, 0.3);
+}
+.gamer p {
+    overflow-x: scroll;
+    flex: 2;
+}
+
+@media screen and (max-width: 720px){
+    .gamer span, .gamers h6.following  {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 400px){
+    button.toggle-gamers {
+        display: inline-block;
+    }
+    .gamers {
+        position: absolute;
+        z-index: 2;
+        width: 300px;
+        left: calc(0px - 304px);
+        transition: left ease-in-out .25s;
+    }
+}
+
+/* PROFILE SECTION */
+
+.profile {
+    margin: 3px;
+    border: 1px solid red;
+    flex: 2;
+    box-shadow: 0px 0px 1px rgb(92, 92, 92);
+    border-radius: 5px;
+    padding: 10px;
+}

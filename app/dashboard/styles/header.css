@@ -1,0 +1,44 @@
+/* User Logged In Status */
+#status {
+    font-size: 18px;
+    color: rgb(19, 114, 138);
+}
+
+/* NAVIGATION */
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+}
+nav {
+    width: 40%;
+    min-width: 300px;
+}
+nav .current {
+    color: rgb(19, 114, 138);
+}
+nav ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    list-style: none;
+    padding: 1.2rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: rgb(56, 56, 56);
+    padding: .8rem;
+    border-radius: 5px;
+}
+
+nav ul li a:hover {
+    background: rgba(0,0,0,.1);
+    text-decoration: underline;
+}
+
+header nav ul li.logout a{
+    color: red;
+}
