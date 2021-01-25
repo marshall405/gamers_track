@@ -1,7 +1,7 @@
 html {
     font-family: sans-serif;
     color: rgb(92, 92, 92);
-    padding: 3px;
+    /* padding: 3px; */
 }
 * {
     margin: 0;
@@ -26,6 +26,13 @@ body {
     border: 1px solid red !important;
 }
 
+.profile-error {
+    border-radius: 5px;
+    background: rgba(219, 10, 10, .3);
+    text-align: center;
+    padding: 5px;
+    transition: opacity ease-in-out .25s;
+}
 button {
     background: none;
     border: none;
@@ -51,6 +58,18 @@ button:hover {
 .offline {
     background: rgb(150, 148, 148);
 }
+
+.success {
+    background: rgba(49, 177, 49, .3);
+    padding: 5px;
+    border-radius: 5px;
+    text-align: center;
+    transition: opacity ease-in-out .25s;
+}
+
+.hide {
+    opacity: 0;
+}
 /* Toggle Gamer List Button */
 
 button.toggle-gamers {
@@ -60,15 +79,27 @@ button.toggle-gamers {
 /* MAIN */
 
 main {
+    min-height: calc(100vh - 86px);
+    width: 100%;
+    padding: 0px 3px 30px 3px;
+    /* padding-bottom: 30px; */
+}
+
+.homepage {
+    height: 100%;
     display: flex;
     align-items: stretch;
-    width: 100%;
 }
+
+/* GAMERS - LEFT SIDE  */
+
 .gamers {
     flex: 1;
     box-shadow: 0px 0px 1px rgb(92, 92, 92);
     border-radius: 5px;
     max-width: 400px;
+    max-height: 50vh;
+    overflow: scroll;
     padding: 10px;
     overflow-x: scroll; 
     background: #FFF;
@@ -100,8 +131,75 @@ main {
     flex: 2;
 }
 
+
+/* PROFILE SECTION */
+
+.profile {
+    margin: 0px 3px;
+    flex: 2;
+    box-shadow: 0px 0px 1px rgb(92, 92, 92);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.profile p {
+    padding: 5px;
+    margin: 5px;
+}
+
+/* Edit Profile */
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.profile-form input {
+    margin: 0px;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid rgb(19, 114, 138);
+}
+
+.profile-form .field {
+    width: 70%;
+    padding: 3px;
+    border-radius: 5px;
+    margin: 5px auto;
+    background: rgba(219, 219, 219, .1);
+}
+
+.profile-form .field select {
+    height: 40px;
+}
+.profile-form .field option {
+    padding: 13px;
+}
+.profile-form .field > * {
+    width: 100%;
+}
+
+label {
+    display: block;
+}
+
+
+/* FOOTER  */
+
+footer {
+    position: relative;
+    height: 30px;
+    padding: 5px;
+    background: rgb(182, 182, 182);
+    margin-top: -30px;
+    clear: both;
+
+}
+/* MEDIA QUERIES */
+
 @media screen and (max-width: 720px){
-    .gamer span, .gamers h6.following  {
+    .gamer span, .gamers .follow-stats  {
         display: none;
     }
 }
@@ -117,15 +215,16 @@ main {
         left: calc(0px - 304px);
         transition: left ease-in-out .25s;
     }
+
 }
 
-/* PROFILE SECTION */
+@media screen and (max-width: 600px){
 
-.profile {
-    margin: 3px;
-    border: 1px solid red;
-    flex: 2;
-    box-shadow: 0px 0px 1px rgb(92, 92, 92);
-    border-radius: 5px;
-    padding: 10px;
+    .profile-form {
+        width: 90%;
+    }
+    .profile-form .field {
+        width: 100%;
+    }
+
 }

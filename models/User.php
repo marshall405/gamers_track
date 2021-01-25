@@ -38,11 +38,39 @@ class User extends Route {
 
     }
 
+    public function update_portfolio($gamertag = NULL, $favgame = NULL, $console = NULL, $streams = NULL){
+        global $conn;
+        $sql = "SELECT * FROM profiles WHERE user_id=$this->id LIMIT 1";
+        $result = mysqli_query($conn, $sql);
+        if($result->num_rows === 0){
+            $query = mysqli_query($conn, "INSERT INTO profiles(gamertag, favgame, gamingConsole, streams, user_id) VALUES (\"$gamertag\", \"$favgame\", \"$console\", \"$streams\", \"$this->id\")");
+            if(!$query){
+                return false;
+            }
+        } else {
+            $query = mysqli_query($conn, "UPDATE profiles SET 
+                gamertag = \"$gamertag\", 
+                favgame = \"$favgame\", 
+                gamingConsole = \"$console\", 
+                streams = \"$streams\"
+                WHERE user_id=\"$this->id\"
+            ");
+            if(!$query){
+                return false;
+            }
+        }
+        return $query;
+    }
+
     public function profile() {
         global $conn;
         $sql = "SELECT * FROM profiles WHERE user_id=$this->id LIMIT 1";
         $result = mysqli_query($conn, $sql);
-        return mysqli_fetch_assoc($result);
+
+        if($result->num_rows > 0) {
+            return mysqli_fetch_assoc($result);
+        }
+        return false;
     }
 
     static function login($email, $pwd) {

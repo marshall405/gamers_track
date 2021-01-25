@@ -1,9 +1,11 @@
 <?php 
     session_start();
+
     if(!isset($_SESSION["userUid"])){
         header("Location: /?unauthorized");
         exit();
     }
+    require_once(__DIR__."/../models/db.php");
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +28,7 @@
         <ul> 
             <?php
                 $uri = $_SERVER["REQUEST_URI"];
-                echo "<li><a href=/dashboard/pages/about.php class=" . ($uri == "/dashboard/pages/about.php" ? "current" : "") . "> About </a></li>";
+                echo "<li><a href=/dashboard/pages/profile.php class=" . ($uri == "/dashboard/pages/profile.php" ? "current" : "") . "> Profile </a></li>";
                 echo "<li class=logout><a href=/logout.php> Logout </a></li>";
             ?>
         </ul>
