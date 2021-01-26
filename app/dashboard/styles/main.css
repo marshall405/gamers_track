@@ -79,9 +79,9 @@ button.toggle-gamers {
 /* MAIN */
 
 main {
-    min-height: calc(100vh - 86px);
+    min-height: calc(100vh - 86.375px);
     width: 100%;
-    padding: 0px 3px 30px 3px;
+    padding: 0px 3px 45px 3px;
     /* padding-bottom: 30px; */
 }
 
@@ -188,11 +188,13 @@ label {
 /* FOOTER  */
 
 footer {
+    color: #FFF;
     position: relative;
-    height: 30px;
-    padding: 5px;
-    background: rgb(182, 182, 182);
-    margin-top: -30px;
+    height: 45px;
+    padding: 15px;
+    background: rgb(93, 164, 211);
+    margin-top: -45px;
+    border-radius: 5px;
     clear: both;
 
 }

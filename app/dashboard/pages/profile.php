@@ -19,10 +19,10 @@
 
         </script>";
     }
-    if($_SERVER["REQUEST_METHOD"] === "POST"){
-
+    if($_SERVER["REQUEST_METHOD"] === "POST"){ 
 
         $query = $user->update_portfolio($_POST["gamertag"], $_POST["favgame"], $_POST["console"], $_POST["streams"]);
+
         if(!$query){
             header("Location: ?error");
         }
@@ -70,7 +70,7 @@
         <option value="">--Please choose an option--</option>
         <option <?=($gameConsole === "PC" ? "selected" : null)?> value="PC">PC</option>
         <option <?=($gameConsole === "PS" ? "selected" : null)?> value="PS">Playstation</option>
-        <option <?=($gameConsole === "BOX" ? "selected" : null)?> value="BOX">XBox</option>
+        <option <?=($gameConsole === "BOX" ? "selected" : null)?> value="BOX">Xbox</option>
     </select>
     </div>
     <div class="field">

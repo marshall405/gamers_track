@@ -16,14 +16,18 @@ class User extends Route {
         if(empty($result)){
             die();
         }else {
-            $this->user = mysqli_fetch_assoc($result);
+            $this->user = $result->fetch_assoc();
         }
+    }
+
+    public function test(?string $a = "not set"){
+        return $a;
     }
 
     public function gamers() {
         // return array of all gamers for a user
         global $conn;
-        $sql = "SELECT u.*, r.date FROM relationships r
+        $sql = "SELECT u.active, u.full_name, u.id, r.date FROM relationships r
                 JOIN users u 
                 ON u.id = (case when (r.user1 != $this->id) then r.user1 else r.user2 END)
                 WHERE r.user1=$this->id OR r.user2=$this->id 
@@ -31,7 +35,7 @@ class User extends Route {
 
         $results = mysqli_query($conn,$sql);
         $array = array();
-        while($row = mysqli_fetch_assoc($results)){
+        while($row = $results->fetch_assoc()){
             $array[] = $row;
         }
         return $array;
@@ -39,27 +43,43 @@ class User extends Route {
     }
 
     public function update_portfolio($gamertag = NULL, $favgame = NULL, $console = NULL, $streams = NULL){
+        if(empty($gamertag)){
+            $gamertag = NULL;
+        }
+        if(empty($favgame)){
+            $favgame = NULL;
+        }
+        if(empty($console)){
+            $console = NULL;
+        }
+        if(empty($streams)){
+            $streams = NULL;
+        }
         global $conn;
         $sql = "SELECT * FROM profiles WHERE user_id=$this->id LIMIT 1";
         $result = mysqli_query($conn, $sql);
         if($result->num_rows === 0){
-            $query = mysqli_query($conn, "INSERT INTO profiles(gamertag, favgame, gamingConsole, streams, user_id) VALUES (\"$gamertag\", \"$favgame\", \"$console\", \"$streams\", \"$this->id\")");
-            if(!$query){
+            $insert = "INSERT INTO profiles(gamertag, favgame, gamingConsole, streams, user_id) VALUES (?,?,?,?,?)";
+            $stmt = mysqli_prepare($conn, $insert);
+            $stmt->bind_param("ssssi", $gamertag, $favgame, $console, $streams, $this->id);
+            if(!$stmt->execute()){
                 return false;
             }
         } else {
-            $query = mysqli_query($conn, "UPDATE profiles SET 
-                gamertag = \"$gamertag\", 
-                favgame = \"$favgame\", 
-                gamingConsole = \"$console\", 
-                streams = \"$streams\"
-                WHERE user_id=\"$this->id\"
-            ");
-            if(!$query){
+            $sql = "UPDATE profiles SET 
+                gamertag = ?, 
+                favgame = ?, 
+                gamingConsole = ?, 
+                streams = ?
+                WHERE user_id= ?
+            ";
+            $stmt = mysqli_prepare($conn, $sql);
+            $stmt->bind_param("ssssi", $gamertag, $favgame, $console, $streams, $this->id);
+            if(!$stmt->execute()){
                 return false;
             }
         }
-        return $query;
+        return $stmt;
     }
 
     public function profile() {

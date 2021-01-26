@@ -1,6 +1,6 @@
 
     <footer>
-        <p> this is a footer </p>
+        <p> Gamers Tracker </p>
     </footer>
 </body>
 </html>
